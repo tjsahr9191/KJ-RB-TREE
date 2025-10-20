@@ -169,13 +169,33 @@ int rbtree_erase(rbtree *t, node_t *p) {
     return 1;
 }
 
-int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
-    // TODO: implement to_array
-    return 0;
+void in_order(node_t *node, key_t *arr, int *index, size_t size);
+void in_order(node_t *node, key_t *arr, int *index, size_t size) {
+    if (node == NULL || *index >= size) return;
+
+    in_order(node->left, arr, index, size);
+
+    if (*index >= size) {
+        return;
+    }
+
+    arr[*index] = node->key;
+    (*index)++;
+
+    in_order(node->right, arr, index, size);
 }
 
-void memory_allocate_check(node_t *new_node) {
-    if (new_node == NULL) {
+int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
+    if (t == NULL || arr == NULL) return 0;
+
+    int index = 0;
+    in_order(t->root, arr, &index, n);
+
+    return index;
+}
+
+void memory_allocate_check(node_t *node) {
+    if (node == NULL) {
         fprintf(stderr, "Error: Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }

@@ -40,7 +40,7 @@ void left_rotate(node_t ** node);
 void exchange_color(node_t *node1, node_t *node2);
 node_t **get_grand_parent_ptr(rbtree *t, node_t *grand_parent);
 void init_new_node(rbtree *t, const key_t key, node_t *new_node);
-void memory_allocate_check(node_t *new_node);
+void memory_allocate_check(node_t *node);
 node_t* remove_node_with_one_or_zero(node_t ** node);
 node_t * find_successor(node_t * node);
 void rebalanceAfterDeletion(rbtree *t, node_t *rp_node, node_t* parent_of_rp);
