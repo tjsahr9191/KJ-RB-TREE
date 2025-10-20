@@ -45,6 +45,6 @@ node_t* remove_node_with_one_or_zero(node_t ** node);
 node_t * find_successor(node_t * node);
 void rebalanceAfterDeletion(rbtree *t, node_t *rp_node, node_t* parent_of_rp);
 void delete_sub_tree(node_t * node);
-
+void in_order(node_t *node, key_t *arr, int *index, size_t size);
 
 #endif  // _RBTREE_H_

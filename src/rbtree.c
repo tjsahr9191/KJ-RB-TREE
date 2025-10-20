@@ -169,22 +169,6 @@ int rbtree_erase(rbtree *t, node_t *p) {
     return 1;
 }
 
-void in_order(node_t *node, key_t *arr, int *index, size_t size);
-void in_order(node_t *node, key_t *arr, int *index, size_t size) {
-    if (node == NULL || *index >= size) return;
-
-    in_order(node->left, arr, index, size);
-
-    if (*index >= size) {
-        return;
-    }
-
-    arr[*index] = node->key;
-    (*index)++;
-
-    in_order(node->right, arr, index, size);
-}
-
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
     if (t == NULL || arr == NULL) return 0;
 
@@ -462,4 +446,14 @@ void rebalanceAfterDeletion(rbtree *t, node_t *node, node_t *parent) {
     }
 }
 
+void in_order(node_t *node, key_t *arr, int *index, size_t size) {
+    if (node == NULL || *index >= size) return;
 
+    in_order(node->left, arr, index, size);
+
+    if (*index >= size) return;
+    arr[*index] = node->key;
+    (*index)++;
+
+    in_order(node->right, arr, index, size);
+}
