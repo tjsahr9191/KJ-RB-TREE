@@ -30,8 +30,18 @@ rbtree *new_rbtree(void) {
     return p;
 }
 
+void delete_sub_tree(node_t * node) {
+    if (node == NULL) return;
+
+    delete_sub_tree(node->left);
+    delete_sub_tree(node->right);
+    free(node);
+}
+
 void delete_rbtree(rbtree *t) {
-    // TODO: reclaim the tree nodes's memory
+    if (t->root == NULL) return;
+
+    delete_sub_tree(t->root);
     free(t);
 }
 
